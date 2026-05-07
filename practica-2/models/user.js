@@ -11,8 +11,9 @@ const PlayerSchema = new mongoose.Schema(
             required: true,
             unique: true
         },
-        teams: {
+        team: {
             type: String,
+            trim: true,
             enum: [
                 'Real Madrid',
                 'F.C. Barcelona',
