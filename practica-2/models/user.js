@@ -2,9 +2,23 @@ import mongoose from "mongoose";
 
 const PlayerSchema = new mongoose.Schema(
     {
-        name: String,
-        surname: String,
-        team: String
+        name: {
+            type: String,
+            required: true
+        },
+        surname: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        teams: {
+            type: String,
+            enum: [
+                'Real Madrid',
+                'F.C. Barcelona',
+                'Atlético de Madrid'
+            ]
+        }
     },
     {
         versionKey: false,
