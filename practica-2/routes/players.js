@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import Player from '../models/players.js';
+import Player from '../models/user.js';
 
 router.post('/', async (req, res) => {
     try{
