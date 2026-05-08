@@ -40,4 +40,50 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/', async (req, res) => {
+    try{
+        const playerUpdated = await Player.findOneAndUpdate(
+            { surname: req.body.surname },
+            req.body,
+            { new: true }
+        );
+        if (!playerUpdated) {
+            return res.status(404).json({
+                message: 'Player not found'
+            });
+        }
+        res.status(200).json({
+            message: 'Ok',
+            player: playerUpdated
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: 'Database error',
+            error: err.message
+        })
+    }
+})
+
+router.delete('/:surname', async (req, res) => {
+    try{
+        const infoDeleted = await Player.deleteOne({
+            surname: req.params.surname
+        });
+        if (infoDeleted.deletedCount === 0){
+            return res.status(404).json({
+                message: 'Player not found'
+            });
+        }
+        res.status(200).json({
+            message: 'Ok',
+            info: infoDeleted
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: 'Database error',
+            error: err.message
+        })
+    }
+})
+
 export default router;
